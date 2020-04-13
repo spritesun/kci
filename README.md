@@ -16,3 +16,12 @@ The binary requires pre-installed Java 8.
 cd ./build/graal
 ./kci [commands]
 ```
+
+### Examples
+```
+./gradlew run --args="pipeline create -n demo -u https://github.com/spritesun/spring-boot-http-gradle-demo"
+./gradlew run --args="pipeline list"
+```
+
+### Things could improve
+- split server and agent

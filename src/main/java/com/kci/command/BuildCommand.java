@@ -6,5 +6,5 @@ import picocli.CommandLine;
         name = "build",
         description = "Trigger build, list running builds"
 )
-public class BuildCommand  extends InternalCommand {
+public class BuildCommand extends InternalCommand {
 }

@@ -1,6 +1,7 @@
 package com.kci;
 
 import com.kci.command.KciCommand;
+import org.dizitart.no2.Nitrite;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
