@@ -4,17 +4,17 @@ package com.kci.job;
 public enum JobTypes {
     GRADLE_BUILD_DOCKER_IMAGE {
         @Override
-        public JobInstance createJobInstance() {
-            return new GradleBuildDockerImageJobInstance();
+        public JobInstance createJobInstance(String homeDirectory) {
+            return new GradleBuildDockerImageJobInstance(homeDirectory);
         }
     },
     DEPLOY_DOCKER_IMAGE {
         @Override
-        public JobInstance createJobInstance() {
+        public JobInstance createJobInstance(String homeDirectory) {
 
-            return new DeployDockerImageJobInstance();
+            return new DeployDockerImageJobInstance(homeDirectory);
         }
     };
 
-    public abstract JobInstance createJobInstance();
+    public abstract JobInstance createJobInstance(String homeDirectory);
 }

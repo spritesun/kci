@@ -10,8 +10,8 @@ public class JobExecutor {
     @Autowired
     private NotificationCenter nc;
 
-    public void execute(Job job) {
-        JobInstance jobInstance = JobTypes.valueOf(job.getType()).createJobInstance();
+    public void execute(Job job, String localPath) {
+        JobInstance jobInstance = JobTypes.valueOf(job.getType()).createJobInstance(localPath);
         jobInstance.execute();
         nc.notifyf("Job %s executed", job.getType());
     }

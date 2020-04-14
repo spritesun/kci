@@ -17,10 +17,11 @@ public class BuildService {
     private JobExecutor jobExecutor;
 
     public void trigger(Pipeline pipeline) {
-        gitService.pull(pipeline.getRepository().getAbsolutePath());
+        String localPath = pipeline.getRepository().getAbsolutePath();
+        gitService.pull(localPath);
         for (Stage stage : pipeline.getConfiguration().getStages()) {
             for (Job job : stage.getJobs()) {
-                jobExecutor.execute(job);
+                jobExecutor.execute(job, localPath);
             }
         }
     }
