@@ -16,11 +16,17 @@ The binary requires pre-installed Java 8.
 cd ./build/graal
 ./kci [commands]
 ```
+### Clean data
+```
+./script/uninstall.sh
+``` 
 
 ### Examples
 ```
 ./gradlew run --args="pipeline create -n demo -u https://github.com/spritesun/spring-boot-http-gradle-demo"
 ./gradlew run --args="pipeline list"
+./gradlew run --args="build trigger -n demo"
+./gradlew run --args="build list"
 ```
 
 ### Things could improve
