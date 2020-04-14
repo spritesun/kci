@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 @Component
 public class LinuxShellExecutor {
     @Autowired
-    protected LogRecorder logRecorder;
+    private LogRecorder logRecorder = new LogRecorder();
 
     public void execute(String command) {
         execute(command, null);

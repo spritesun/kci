@@ -1,0 +1,116 @@
+❯ ./kci pipeline create -n demo -u https://github.com/spritesun/spring-boot-http-gradle-demo
+Downloaded https://github.com/spritesun/spring-boot-http-gradle-demo to /tmp/kci/repository/c9c314af-bd27-415a-8fc5-8e355114f890.
+Pipeline demo created.
+
+❯ ./kci pipeline list
+Name	Url	LAST_BUILD	STATUS
+demo	https://github.com/spritesun/spring-boot-http-gradle-demo	N\A	N\A
+
+❯ ./kci build trigger -n demo
+Executing: ./gradlew clean build
+:clean UP-TO-DATE
+:compileJava
+:processResources NO-SOURCE
+:classes
+:bootJar
+:jar SKIPPED
+:assemble
+:compileTestJava
+:processTestResources NO-SOURCE
+:testClasses
+:test
+2020-04-14 17:52:32.123  INFO 8606 --- [       Thread-6] o.s.w.c.s.GenericWebApplicationContext   : Closing org.springframework.web.context.support.GenericWebApplicationContext@5fbca646: startup date [Tue Apr 14 17:52:30 AEST 2020]; root of context hierarchy
+:check
+:build
+
+BUILD SUCCESSFUL in 5s
+5 actionable tasks: 4 executed, 1 up-to-date
+
+Exited with error code : 0
+
+Executing: docker build -t localhost:5000/spring-demo:1.0 .
+Sending build context to Docker daemon  18.03MB
+
+Step 1/6 : FROM openjdk:8-jdk-slim
+ ---> 24c99a4e95d3
+Step 2/6 : ENV PORT 8080
+ ---> Using cache
+ ---> a23e64e6dcc8
+Step 3/6 : EXPOSE 8080
+ ---> Using cache
+ ---> 8e258daeffa2
+Step 4/6 : COPY build/libs/*.jar /opt/app.jar
+ ---> 3c151197bb88
+Step 5/6 : WORKDIR /opt
+ ---> Running in c85b6f609a9d
+Removing intermediate container c85b6f609a9d
+ ---> 30f6389fdb20
+Step 6/6 : CMD ["java", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseCGroupMemoryLimitForHeap", "-jar", "app.jar"]
+ ---> Running in a6bd169d4000
+Removing intermediate container a6bd169d4000
+ ---> 52b7d92425ae
+Successfully built 52b7d92425ae
+Successfully tagged localhost:5000/spring-demo:1.0
+
+Exited with error code : 0
+
+Executing: docker push localhost:5000/spring-demo:1.0
+The push refers to repository [localhost:5000/spring-demo]
+2f2a00f9b447: Preparing
+295135b289dc: Preparing
+f05a25e4d38a: Preparing
+4c5ed9844b2b: Preparing
+c3a984abe8a8: Preparing
+c3a984abe8a8: Layer already exists
+f05a25e4d38a: Layer already exists
+4c5ed9844b2b: Layer already exists
+295135b289dc: Layer already exists
+2f2a00f9b447: Pushed
+1.0: digest: sha256:46bc42eb742c4e8bb230512ca8ece0dcfaee2e914beb386fec63e272ac445772 size: 1372
+
+Exited with error code : 0
+Job GRADLE_BUILD_DOCKER_IMAGE executed
+
+Executing: IMAGE_NAME=localhost:5000/spring-demo:1.0 kubectl delete -f /tmp/kci/repository/c9c314af-bd27-415a-8fc5-8e355114f890/kubectl.yaml
+service "spring-demo-svc" deleted
+deployment.apps "spring-demo-app" deleted
+
+Exited with error code : 0
+
+Executing: IMAGE_NAME=localhost:5000/spring-demo:1.0 kubectl apply -f /tmp/kci/repository/c9c314af-bd27-415a-8fc5-8e355114f890/kubectl.yaml
+service/spring-demo-svc created
+deployment.apps/spring-demo-app created
+
+Exited with error code : 0
+Job DEPLOY_DOCKER_IMAGE executed
+Build demo-1 finished.
+
+❯ ./kci build trigger -n demo
+
+❯ ./kci build list
+Pipeline	Sequence	STATUS
+demo	1	SUCCESS
+demo	2	SUCCESS
+
+❯ ./kci env
+Name
+Dev
+Staging
+Prod
+
+❯ ./kci application list
+
+Executing: kubectl get deployments
+NAME              READY   UP-TO-DATE   AVAILABLE   AGE
+spring-demo-app   1/1     1            1           12s
+
+Exited with error code : 0
+❯ ./kci application open -n spring-demo-app
+
+Executing: kubectl port-forward deployment/spring-demo-app 8080:8080
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+^C
+Exited with error code : 0
+
+❯

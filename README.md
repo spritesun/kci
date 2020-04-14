@@ -4,7 +4,7 @@
 
 ### Create kubernetes local cluster and docker registry
 ```
-KIND_CLUSTER_NAME=kind-reg ./script/kind-with-registry.sh
+./script/kind-with-registry.sh
 ``` 
 
 ### Run CLI with args via gradle
@@ -14,7 +14,7 @@ KIND_CLUSTER_NAME=kind-reg ./script/kind-with-registry.sh
 
 ### Build a native CLI binary
 ```
-./gradlew nativeImage
+./gradlew clean nativeImage
 ```
 
 ### Run standalone CLI binary
@@ -41,9 +41,8 @@ cd ./build/graal
 ./gradlew run --args="application open -n spring-demo-app"
 ```
 
-### Examples with Output
-```
-```
+### Demo with outputs
+See `DemoWithConsoleOutput.log` for details.
 
 ### Things could improve
 - split server and agent
