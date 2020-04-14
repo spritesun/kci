@@ -1,3 +1,12 @@
+### System requirement 
+- local Kubernetes cluster kind
+- Java 8
+
+### Create kubernetes local cluster and docker registry
+```
+KIND_CLUSTER_NAME=kind-reg ./script/kind-with-registry.sh
+``` 
+
 ### Run CLI with args via gradle
 ```
 ./gradlew run --args="pipeline"

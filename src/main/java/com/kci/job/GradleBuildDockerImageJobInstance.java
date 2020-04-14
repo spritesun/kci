@@ -8,7 +8,8 @@ public class GradleBuildDockerImageJobInstance extends JobInstance {
     @Override
     public void execute() {
         executeLinuxShell("./gradlew clean build");
-//        TODO: should handle image version tag
-        executeLinuxShell(String.format("docker build -t spring-demo ."));
+        // TODO: should handle image version tag
+        executeLinuxShell(String.format("docker build -t %s .", DEFAULT_IMAGE_NAME));
+        executeLinuxShell(String.format("docker push %s", DEFAULT_IMAGE_NAME));
     }
 }
