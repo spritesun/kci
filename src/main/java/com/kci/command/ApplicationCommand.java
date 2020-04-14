@@ -4,9 +4,10 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "application",
-        description = "List deployed applications",
+        description = "List/Open deployed applications",
         subcommands = {
-                ApplicationListCommand.class
+                ApplicationListCommand.class,
+                ApplicationOpenCommand.class
         }
 )
 public class ApplicationCommand extends InternalCommand {

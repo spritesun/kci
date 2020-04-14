@@ -9,7 +9,7 @@ public abstract class InternalCommand implements Callable<Integer> {
     private CommandLine.Model.CommandSpec spec;
 
     @Override
-    public Integer call() {
+    public Integer call() throws Exception {
         spec.commandLine().usage(System.out);
         return 0;
     }

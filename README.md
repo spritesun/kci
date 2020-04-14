@@ -36,6 +36,13 @@ cd ./build/graal
 ./gradlew run --args="pipeline list"
 ./gradlew run --args="build trigger -n demo"
 ./gradlew run --args="build list"
+./gradlew run --args="env"
+./gradlew run --args="application list"
+./gradlew run --args="application open -n spring-demo-app"
+```
+
+### Examples with Output
+```
 ```
 
 ### Things could improve
